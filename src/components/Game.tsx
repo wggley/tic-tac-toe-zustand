@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { combine } from 'zustand/middleware'
+import { combine, persist, createJSONStorage } from 'zustand/middleware'
 import Square from './Square';
 
 interface GameState {
@@ -12,8 +12,8 @@ interface GameActions {
   setCurrentMove: (nextCurrentMove: number) => void;
 }
 
-const useGameStore = create(  
-  combine({ history: [Array(9).fill(null)], currentMove: 0 }, (set) => {
+const useGameStore = create(
+  persist(combine({ history: [Array(9).fill(null)], currentMove: 0 }, (set) => {
     return {      
       setHistory: (nextHistory ) => {
         set((state: GameState) => ({
@@ -29,6 +29,10 @@ const useGameStore = create(
       },
     } as GameActions;
   }),
+  {
+    name: 'app-storage', 
+    storage: createJSONStorage(() => localStorage)
+  })
 )
 
 interface BoardProps {
