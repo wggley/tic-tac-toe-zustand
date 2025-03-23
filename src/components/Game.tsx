@@ -8,8 +8,8 @@ interface GameState {
 }
 
 interface GameActions {  
-  setHistory: (nextIsHistory: unknown) => void;
-  setCurrentMove: (nextIsHistory: unknown) => void;
+  setHistory: (nextHistory: Array<Array<(string | null)[]>>) => void;
+  setCurrentMove: (nextCurrentMove: number) => void;
 }
 
 const useGameStore = create(  
@@ -18,19 +18,13 @@ const useGameStore = create(
       setHistory: (nextHistory ) => {
         set((state: GameState) => ({
           ...state,
-          history:
-            typeof nextHistory === 'function'
-              ? nextHistory(state.history)
-              : nextHistory,
+          history: nextHistory,
         }))
       },
       setCurrentMove: (nextCurrentMove) => {
         set((state: GameState) => ({
           ...state,
-          currentMove:
-            typeof nextCurrentMove === 'function'
-              ? nextCurrentMove(state.currentMove)
-              : nextCurrentMove,
+          currentMove: nextCurrentMove,
         }))
       },
     } as GameActions;
