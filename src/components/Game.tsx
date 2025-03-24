@@ -90,7 +90,7 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
 
   return (
     <>
-      <div style={{ marginBottom: '0.5rem' }}>{status}</div>
+      <div style={{ color: '#f6f6f6', marginBottom: '0.5rem' }}>{status}</div>
       <div
         style={{
           display: 'grid',
@@ -98,7 +98,7 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
           gridTemplateRows: 'repeat(3, 1fr)',
           width: 'calc(3 * 2.5rem)',
           height: 'calc(3 * 2.5rem)',
-          border: '1px solid #999',
+          border: '1px solid #18022b'
         }}
       >
         {squares.map((square, squareIndex) => (
@@ -147,8 +147,21 @@ export default function Game() {
                 : 'Go to game start'
 
             return (
-              <li key={historyIndex}>
-                <button onClick={() => jumpTo(historyIndex)}>
+              <li 
+                key={historyIndex}
+                style={{ 
+                  color: '#f6f6f6'                
+                }}
+              >
+                <button 
+                  style={{ 
+                    backgroundColor: '#18022b',
+                    color: '#f6f6f6',
+                    border: '1px solidrgb(52, 8, 90)', 
+                    marginBottom: '0.5rem' 
+                  }}
+                  onClick={() => jumpTo(historyIndex)}
+                >
                   {description}
                 </button>
               </li>
